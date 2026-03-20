@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "TaskManager.UI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "TaskManager.UI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
