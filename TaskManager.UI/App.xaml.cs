@@ -12,6 +12,8 @@ namespace TaskManager.UI
     {
         public static IServiceProvider Services { get; private set; }
         
+        private Window m_window;
+        
         public App()
         {
             this.InitializeComponent();
@@ -26,6 +28,11 @@ namespace TaskManager.UI
             services.AddTransient<ProjectDetailsViewModel>();
 
             Services = services.BuildServiceProvider();
+        }
+        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        {
+            m_window = new MainWindow();
+            m_window.Activate();
         }
     }
 }
