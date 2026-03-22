@@ -15,6 +15,11 @@ namespace TaskManager.DAL
         {
             var p = new Project("Course", "Desc", ProjectType.Educational);
             projects.Add(p);
+            var p2 = new Project("Exam preparation", "Desc", ProjectType.Personal);
+            projects.Add(p2);
+            var p3 = new Project("Presentation", "Desc", ProjectType.Work);
+            projects.Add(p3);
+       
         }
         public List<Project> GetAll()
         {
