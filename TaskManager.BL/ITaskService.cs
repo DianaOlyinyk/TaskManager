@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace TaskManager.BL
 {
-    public interface IProjectService
+    public interface ITaskService
     {
-        List<ProjectListDto> GetProjects();
-        ProjectDetailsDto GetProjectDetails(int projectId);
+        TaskDetailsDto GetTaskDetails(int id);
     }
 }

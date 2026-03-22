@@ -3,30 +3,61 @@
 <Page
     x:Class="TaskManager.UI.Pages.ProjectDetailsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:TaskManager.UI.Pages">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <StackPanel Padding="20">
+    <ScrollViewer>
+        <StackPanel Padding="20" Spacing="10">
 
-        <TextBlock x:Name="ProjectTitle"
-                   FontSize="28"/>
+            <TextBlock Text="{Binding Name}"
+                   FontSize="28"
+                   FontWeight="Bold"/>
 
-        <TextBlock x:Name="ProjectDescription"
-                   Margin="0,10"/>
+            <TextBlock Text="{Binding Description}"
+                   TextWrapping="Wrap"
+                   Margin="0,10,0,0"/>
 
-        <TextBlock x:Name="ProjectProgress"
-                   Margin="0,10"/>
+            <TextBlock Text="{Binding ProgressText}"
+                   Margin="0,10,0,0"/>
 
-        <TextBlock Text="Tasks"
+            <TextBlock Text="Tasks"
                    FontSize="20"
-                   Margin="0,20"/>
+                   Margin="0,20,0,10"/>
 
-        <ListView x:Name="TasksList" SelectionChanged="TasksList_SelectionChanged"/>
+            <ListView ItemsSource="{Binding Tasks}"
+                  SelectionChanged="TasksList_SelectionChanged">
 
-        <Button Content="Back"
-                Margin="0,20,0,0"
-                Click="Back_Click"/>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Padding="10" Margin="0,5"
+                            BorderBrush="Gray"
+                            BorderThickness="1">
 
-    </StackPanel>
+                            <StackPanel>
+
+                                <TextBlock Text="{Binding Title}"
+                                       FontSize="16"
+                                       FontWeight="SemiBold"/>
+
+                                <TextBlock Text="{Binding Priority}"
+                                       FontSize="12"/>
+
+                                <TextBlock Text="{Binding CompletedText}"
+                                       FontSize="12"/>
+
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+            <Button Content="Back"
+                Click="Back_Click"
+                Margin="0,20,0,0"/>
+
+        </StackPanel>
+    </ScrollViewer>
+
 
 </Page>
+

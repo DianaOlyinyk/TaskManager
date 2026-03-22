@@ -10,9 +10,16 @@
                    FontSize="30"
                    Margin="0,0,0,20"/>
 
-        <ListView x:Name="ProjectsList"
-                  SelectionChanged="ProjectsList_SelectionChanged"/>
-
+        <ListView ItemsSource="{Binding Projects}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Text="{Binding Progress}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackPanel>
 </Page>
 

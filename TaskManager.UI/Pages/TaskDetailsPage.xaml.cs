@@ -1,36 +1,25 @@
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using TaskManager.DL.Models;
-
+using TaskManager.UI.ViewModels;
 using TaskModel = TaskManager.DL.Models.Task;
 
 namespace TaskManager.UI.Pages
 {
     public sealed partial class TaskDetailsPage : Page
     {
-        private TaskModel task;
+        private TaskDetailsViewModel ViewModel;
 
         public TaskDetailsPage()
         {
             this.InitializeComponent();
+
+            ViewModel = App.Services.GetRequiredService<TaskDetailsViewModel>();
+            DataContext = ViewModel;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            task = (TaskModel)e.Parameter;
-
-            TaskTitle.Text = task.Title;
-            TaskDescription.Text = task.Description;
-            TaskPriority.Text = $"Priority: {task.Priority}";
-            TaskDueDate.Text = $"Due: {task.DueDate}";
-            TaskOverdue.Text = $"Overdue: {task.IsOverdue}";
-        }
-
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.GoBack();
-        }
     }
 }
 

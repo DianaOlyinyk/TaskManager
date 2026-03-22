@@ -8,6 +8,7 @@ namespace TaskManager.BL
 {
     public class ProjectListDto
     {
-        
+        public string Name { get; set; }
+        public double Progress { get; set; }
     }
 }
