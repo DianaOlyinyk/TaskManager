@@ -20,6 +20,16 @@ namespace TaskManager.UI.Pages
             DataContext = ViewModel;
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            int taskId = (int)e.Parameter; 
+            ViewModel.Load(taskId);
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.GoBack();
+        }
     }
 }
 

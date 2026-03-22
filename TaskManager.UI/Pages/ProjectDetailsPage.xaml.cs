@@ -20,6 +20,28 @@ namespace TaskManager.UI.Pages
             DataContext = ViewModel;
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            int id = (int)e.Parameter;
+            ViewModel.Load(id);
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.GoBack();
+        }
+
+        private void TasksList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var list = (ListView)sender;
+            var selectedTask = (TaskListDto)list.SelectedItem;
+
+            if (selectedTask != null)
+            {
+                Frame.Navigate(typeof(TaskDetailsPage), selectedTask.Id);
+                list.SelectedItem = null;
+            }
+        }
     }
 
 }

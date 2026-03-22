@@ -12,6 +12,28 @@ namespace TaskManager.UI.ViewModels
     {
         private readonly IProjectService service;
 
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public double Progress { get; set; }
+
+        public ObservableCollection<TaskListDto> Tasks { get; set; }
+        public string ProgressText => $"Progress: {Progress}%";
+
+        public ProjectDetailsViewModel(IProjectService service)
+        {
+            this.service = service;
+        }
+
+        public void Load(int projectId)
+        {
+            var project = service.GetProjectDetails(projectId);
+
+            Name = project.Name;
+            Description = project.Description;
+            Progress = project.Progress;
+
+            Tasks = new ObservableCollection<TaskListDto>(project.Tasks);
+        }
     }
 
 }

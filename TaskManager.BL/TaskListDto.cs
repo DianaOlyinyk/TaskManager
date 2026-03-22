@@ -15,5 +15,7 @@ namespace TaskManager.BL
         public string Priority { get; set; }
 
         public bool IsCompleted { get; set; }
+
+        public string CompletedText => IsCompleted ? "Completed: Yes" : "Completed: No";
     }
 }
