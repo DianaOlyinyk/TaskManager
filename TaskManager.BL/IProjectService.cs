@@ -9,6 +9,5 @@ namespace TaskManager.BL
     public interface IProjectService
     {
         List<ProjectListDto> GetProjects();
-        ProjectDetailsDto GetProjectDetails(int projectId);
     }
 }
