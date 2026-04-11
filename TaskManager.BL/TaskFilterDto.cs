@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskManager.BL
 {
-    public class ProjectListDto
+    public class TaskFilterDto
     {
-        public string Name { get; set; }
-        public double Progress { get; set; }
-        private int _id {  get; }
     }
 }

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskManager.DL.Models;
 
 namespace TaskManager.BL
 {
-    public class ProjectListDto
+    public class CreateProjectDto
     {
-        public string Name { get; set; }
-        public double Progress { get; set; }
-        private int _id {  get; }
+        string Name;
+        string Description;
+        ProjectType Type;
     }
 }
