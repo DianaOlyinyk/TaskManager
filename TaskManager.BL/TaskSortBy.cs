@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace TaskManager.BL
 {
-    public interface ITaskService
+    public enum TaskSortBy
     {
-        Task<TaskDetailsDto?> GetTaskDetailsAsync(int id);
+        Title,
+        DueDate,
+        Priority,
+        Status
     }
 }

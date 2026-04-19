@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace TaskManager.BL
 {
     public interface IProjectService
     {
-        List<ProjectListDto> GetProjects();
-        ProjectDetailsDto GetProjectDetails(int projectId);
+        Task<List<ProjectListDto>> GetProjectsAsync(ProjectFilterDto? filter = null);
+        Task<ProjectDetailsDto?> GetProjectDetailsAsync(int projectId);
+        Task AddProjectAsync(CreateProjectDto dto);
+        Task DeleteProjectAsync(int projectId);
     }
 }

@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace TaskManager.BL
 {
-    public interface ITaskService
+    public enum ProjectSortBy
     {
-        Task<TaskDetailsDto?> GetTaskDetailsAsync(int id);
+        Name,
+        Progress,
+        Type
     }
 }

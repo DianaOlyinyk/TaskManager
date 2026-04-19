@@ -1,22 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TaskManager.BL;
 
 namespace TaskManager.UI.ViewModels
 {
-    public class ProjectDetailsViewModel
+    public class ProjectDetailsViewModel : BaseViewModel
     {
         private readonly IProjectService service;
 
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public double Progress { get; set; }
+        private string name = string.Empty;
+        private string description = string.Empty;
+        private double progress;
+        private ObservableCollection<TaskListDto> tasks = new();
 
-        public ObservableCollection<TaskListDto> Tasks { get; set; }
+        public string Name
+        {
+            get => name;
+            set => SetProperty(ref name, value);
+        }
+
+        public string Description
+        {
+            get => description;
+            set => SetProperty(ref description, value);
+        }
+
+        public double Progress
+        {
+            get => progress;
+            set
+            {
+                if (SetProperty(ref progress, value))
+                {
+                    OnPropertyChanged(nameof(ProgressText));
+                }
+            }
+        }
+
+        public ObservableCollection<TaskListDto> Tasks
+        {
+            get => tasks;
+            set => SetProperty(ref tasks, value);
+        }
+
         public string ProgressText => $"Progress: {Progress}%";
 
         public ProjectDetailsViewModel(IProjectService service)
@@ -24,16 +51,34 @@ namespace TaskManager.UI.ViewModels
             this.service = service;
         }
 
-        public void Load(int projectId)
+        public async Task LoadAsync(int projectId)
         {
-            var project = service.GetProjectDetails(projectId);
+            try
+            {
+                IsBusy = true;
+                ErrorMessage = null;
 
-            Name = project.Name;
-            Description = project.Description;
-            Progress = project.Progress;
+                var project = await service.GetProjectDetailsAsync(projectId);
 
-            Tasks = new ObservableCollection<TaskListDto>(project.Tasks);
+                if (project is null)
+                {
+                    ErrorMessage = "Project not found.";
+                    return;
+                }
+
+                Name = project.Name;
+                Description = project.Description;
+                Progress = project.Progress;
+                Tasks = new ObservableCollection<TaskListDto>(project.Tasks);
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage = ex.Message;
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
     }
-
 }

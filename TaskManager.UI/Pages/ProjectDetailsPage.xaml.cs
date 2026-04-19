@@ -1,32 +1,31 @@
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using TaskManager.BL;
-using TaskManager.DL.Models;
 using TaskManager.UI.ViewModels;
 
 namespace TaskManager.UI.Pages
 {
     public sealed partial class ProjectDetailsPage : Page
     {
-        private ProjectDetailsViewModel ViewModel;
+        private readonly ProjectDetailsViewModel viewModel;
 
         public ProjectDetailsPage()
         {
             this.InitializeComponent();
 
-            ViewModel = App.Services.GetRequiredService<ProjectDetailsViewModel>();
-            DataContext = ViewModel;
+            viewModel = App.Services.GetRequiredService<ProjectDetailsViewModel>();
+            DataContext = viewModel;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
             int id = (int)e.Parameter;
-            ViewModel.Load(id);
+            await viewModel.LoadAsync(id);
         }
 
-        private void Back_Click(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
             Frame.GoBack();
         }

@@ -1,35 +1,29 @@
-﻿//using TaskManager.DL.Models;
+﻿
 using Task = TaskManager.DL.Models.Task;
 using TaskStatus = TaskManager.DL.Models.TaskStatus;
 namespace TaskManager.DL.Models;
 public class Project
 {
-    private static int _idCounter = 1;
-
-    public int Id { get; }
-    public string Name { get; set; }
-    public string Description { get; set; }
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
     public ProjectType Type { get; set; }
-    public List<Task> Tasks { get; set; }
+    public List<Task> Tasks { get; set; } = new();
 
+    public double Progress => Tasks.Count == 0 ? 0 : (double)Tasks.Count(t => t.Status == TaskStatus.Completed) / Tasks.Count * 100;
+
+    public Project() { }
+    public Project(int id, string name, string description, ProjectType type)
+            : this(name, description, type)
+    {
+        Id = id;
+    }
     public Project(string name, string description, ProjectType type)
     {
-        Id = _idCounter++;
         Name = name;
         Description = description;
         Type = type;
         Tasks = new List<Task>();
-    }
-
-    public double Progress
-    {
-        get
-        {
-            if (Tasks.Count == 0) return 0;
-
-            int completed = Tasks.Count(t => t.Status == TaskStatus.Completed);
-            return (double)completed / Tasks.Count * 100;
-        }
     }
 
     public void AddTask(Task task)

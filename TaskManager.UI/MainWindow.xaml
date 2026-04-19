@@ -3,5 +3,7 @@
     x:Class="TaskManager.UI.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Frame x:Name="MainFrame" />
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Frame x:Name="MainFrame" />
+    </Grid>
 </Window>

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TaskManager.DAL;
+﻿using TaskManager.DAL;
 
 namespace TaskManager.BL
 {
@@ -16,14 +11,18 @@ namespace TaskManager.BL
             this.repository = repository;
         }
 
-        public TaskDetailsDto GetTaskDetails(int id)
+        public async Task<TaskDetailsDto?> GetTaskDetailsAsync(int id)
         {
-            var task = repository.GetAll()
-                .SelectMany(p => p.Tasks)
-                .FirstOrDefault(t => t.Id == id);
+            var task = await repository.GetTaskByIdAsync(id);
+
+            if (task is null)
+            {
+                return null;
+            }
 
             return new TaskDetailsDto
             {
+                Id = task.Id,
                 Title = task.Title,
                 Description = task.Description,
                 Priority = task.Priority.ToString(),
@@ -33,5 +32,4 @@ namespace TaskManager.BL
             };
         }
     }
-
 }

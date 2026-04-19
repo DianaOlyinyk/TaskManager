@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TaskManager.DL.Models;
 
 namespace TaskManager.BL
 {
     public class ProjectListDto
     {
-        public string Name { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
         public double Progress { get; set; }
-        private int _id {  get; }
+        public ProjectType Type { get; set; }
     }
 }
